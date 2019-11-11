@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% load socialaccount %}
+
+{% providers_media_js %}
+<h1>소셜로그인</h1>
+<form action="." method="post">{% csrf_token %}
+<a href="/accounts/login">로그인</a><br>
+1
+<a href="/accounts/signup">회원가입</a><br>
+
+{% if user.is_authenticated %}
+<a href="/accounts/logout">로그아웃</a><br>
+{{user.username}} 님이 로그인 중
+
+{% else %}
+<a href="{% provider_login_url 'facebook' %}">페이스북 로그인</a>
+<br> 로그인 해야합니다
+{% endif %}
+</form>
+</body>
+</html>
